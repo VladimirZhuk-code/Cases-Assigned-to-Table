@@ -1,0 +1,48 @@
+<template>
+    <!-- HEADER -->
+     <div class="slds-page-header">
+        <div>
+            <lightning-button label="Refresh" title = "Refresh" data-id="refreshId" class="slds-float_right slds-m-top_xx-small" onclick={handleRefresh}></lightning-button>
+        </div>
+         <div class="slds-grid">
+             <div class="slds-page-header__col-title">
+                 <div class="slds-media slds-media_center">
+                     <div class="slds-media__figure">
+                         <lightning-icon icon-name="standard:care_request_reviewer"  title={caseAssignedToTitle} ></lightning-icon>
+                     </div>
+                     <div class="slds-media__body">
+                         <div class="slds-page-header__name">
+                             <div class="slds-page-header__name-title">
+                                 <h1>
+                                     <span>Open Cases</span>
+                                     <span class="slds-page-header__title slds-truncate " title={caseAssignedToTitle}>Cases Assigned to {name} </span>
+                                 </h1>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="slds-grid">
+             <div class="slds-col slds-align-buttom slds-m-top_x-small">
+                 <div class="slds-text-body_small">{quantity} item(s) • Sorted by Date Opened • Filtered by Cases assigned to {name}</div>
+                 <div class="slds-text-body_small">Updated {todayHTML}</div>
+             </div>    
+         </div>
+     </div>
+     <div class="exampleHolder">
+        <lightning-spinner if:true={isLoading} variant="brand" alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+     <!-- TABLE -->
+         <div style="height: 200px;" lwc:if={quantity}>
+             <lightning-datatable
+                     key-field="Id"
+                     data={data}
+                     hide-checkbox-column 
+                     columns={columns}>
+             </lightning-datatable>
+         </div>
+         <div class="slds-box slds-theme_shade slds-align_absolute-center" lwc:else>
+            There are no Cases assigned to you now.
+         </div>
+ </template>
